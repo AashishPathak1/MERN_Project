@@ -1,13 +1,33 @@
 const Book = require("../models/Book"); // Import your Book model
-
+const cloudinary = require("cloudinary").v2; // Import your Cloudinary model
 async function addBook(req, res) {
   try {
-    console.log("Request body:", req.body); // Log the request body
-    const book = new Book(req.body); // Create a new book instance
-    await book.save(); // Save the book to the database
-    // res.status(201).json(book);
+    // console.log("Request body:", req.body); // Log the request body
+    // const book = new Book(req.body); // Create a new book instance
+    // await book.save(); // Save the book to the database
+    // // res.status(201).json(book);
+    // let books = await Book.find({});
+    // res.render("booktable", { books: books }); // Respond with the created book and a 201 status
+    let book = new Book(req.body);
+    if (req.file) {
+      cloudinary.config({
+        cloud_name: "dmvkdb242",
+        api_key: "946234975599653",
+        api_secret: "15n-LJb-v7GgzpyH_ZYrSJ9Wcxg"
+      });
+
+      const result = await cloudinary.uploader.upload(req.file.path);
+      console.log(result.secure_url, "uploaded.secure_url");
+      book.bookImage = result.secure_url;
+    }
+
+    // console.log("Request body:", req.body); // Log the request body
+    // console.log(req.file, "req.file");
+    await book.save();
     let books = await Book.find({});
-    res.render("booktable", { books: books }); // Respond with the created book and a 201 status
+    res.render("booktable", { books: books }); 
+    // Respond with the created book and a 201 status
+    // res.end("<h1>Uploading will ne completed soon...</h1>");
   } catch (error) {
     console.error("Something went wrong in book Controller", error);
     res

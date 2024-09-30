@@ -6,6 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>Books - Book Emporium</title>
+    <link rel="icon" href="/images/logo.jpg" type="image/jpg">
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link
@@ -336,6 +337,9 @@
                                 <thead>
                                     <tr>
                                         <th>
+                                            <b>Book</b>Image
+                                        </th>
+                                        <th>
                                             <b>Book</b> Name
                                         </th>
                                         <th>
@@ -371,6 +375,10 @@
                                     <% books.forEach((book)=> { %>
                                         <tr>
                                             <td>
+                                                <!-- <%= book.bookImage %> -->
+                                                <img src="<%= book.bookImage %>" text-center width="30px" height="30px">
+                                            </td>
+                                            <td>
                                                 <%= book.bookTitle %>
                                             </td>
                                             <td>
@@ -398,10 +406,13 @@
                                                 <%= book.pricePerUnit %>
                                             </td>
                                             <td>
-                                                <a href="/edit/book/<%= book._id %>"
-                                                    class="btn btn-primary w-auto">Edit</a>
-                                                <a href="/delete/book/<%= book._id %>"
-                                                    class="btn btn-danger w-auto">Delete</a>
+                                                <!-- <a href="/edit/book/<%= book._id %>" class="btn btn-primary">Edit</a> -->
+                                                <a href="/edit/book/<%= book._id %>">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                </a>
+
+                                                <a href="/delete/book/<%= book._id %>"><i class="bi bi-trash"
+                                                        style="color: red;"></i></a>
                                             </td>
                                         </tr>
                                         <% }); %>

@@ -1,9 +1,16 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
 const bookcontroller = require("../controllers/bookcontroller"); // Assuming this is your controller
 
+const upload = multer({
+  storage: multer.diskStorage({})
+  // limits : {fileSize: 10*1024*1024},
+});
+
 // route to add the book
-router.post("/add/book", (req, res) => {
+// upload.single("bookImage") ==> used for fetching the image columnn from the schema
+router.post("/add/book", upload.single("bookImage"), (req, res) => {
   bookcontroller.addBook(req, res);
   // res.render("addBook");
 });

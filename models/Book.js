@@ -40,6 +40,9 @@ let BookSchema = new Schema({
     type: Number,
     required: true
   },
+  bookImage: {
+    type: String
+  },
   lastLogin: { type: Date },
   createdAt: Date,
   updatedAt: Date
