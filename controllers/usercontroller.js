@@ -22,6 +22,35 @@ async function addUser(req, res) {
   }
 }
 
+async function addNewUser(req, res) {
+  try {
+    let existingUser = await User.findOne({ email: req.body.email });
+
+    if (existingUser) {
+      res.status(400).send({ message: "Email already exists" });
+    } else {
+      console.log("Received form data:", req.body);
+
+      let password = await bcrypt.hash(req.body.password, saltRound);
+      console.log("Password:", password);
+
+      let newUser = await User.create({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: password,
+        country: req.body.country,
+        mobileNo: req.body.mobileNo
+      });
+
+      res.redirect("/usertable");
+    }
+  } catch (err) {
+    console.log("Error:", err);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+}
+
 async function loginUser(req, res) {
   try {
     const { email, password } = req.body;
@@ -122,5 +151,6 @@ module.exports = {
   getUsers,
   deleteUser,
   updateUser,
-  getUserForEdit
+  getUserForEdit,
+  addNewUser
 };

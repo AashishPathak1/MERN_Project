@@ -12,6 +12,19 @@ router.get("/user/signup", (req, res) => {
   res.render("signuppage");
 });
 
+router.get("/add/new/user", (req, res) => {
+  res.render("addnewuser");
+});
+
+router.post("/add/new/user", async (req, res) => {
+  try {
+    await usercontroller.addNewUser(req, res);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server error");
+  }
+});
+
 router.post("/add/user", async (req, res) => {
   try {
     await usercontroller.addUser(req, res);
@@ -59,8 +72,8 @@ router.get("/delete/user/:id", (req, res) => {
   usercontroller.deleteUser(req, res);
 });
 
-// router.get("/dashboard", (req, res) => {
-//   res.render("dashboard");
-// });
+router.get("/login", (req, res) => {
+  res.render("loginpage");
+});
 
 module.exports = router;

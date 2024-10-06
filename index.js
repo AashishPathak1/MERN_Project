@@ -4,6 +4,7 @@ const connection = require("./connection");
 const app = express();
 const userRoute = require("./routes/user");
 const bookRoute = require("./routes/book");
+// here downwards common and common.createAdmin uncomment in the case of making a new admin
 // const common = require("./helper/common");
 // common.createAdmin();
 
@@ -11,10 +12,11 @@ const bookRoute = require("./routes/book");
 connection();
 
 // Middleware to parse JSON bodies
-const session = require("express-session");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// session is used to maintain the session around the browser
+const session = require("express-session");
 // session using to keep track the activity on the browser
 app.use(
   session({

@@ -20,11 +20,6 @@ router.get("/booktable", (req, res) => {
   bookcontroller.getBooks(req, res);
 });
 
-// rendering to the main admin page
-// router.get("/adminpanel", (req, res) => {
-//   res.render("adminpanel");
-// });
-
 router.get("/addbooks", (req, res) => {
   res.render("addbooks");
 });

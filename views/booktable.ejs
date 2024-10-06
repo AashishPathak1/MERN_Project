@@ -4,9 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <title>Books - Book Emporium</title>
     <link rel="icon" href="/images/logo.jpg" type="image/jpg">
+    <title>Books - Book Emporium</title>
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link
@@ -29,15 +28,8 @@
             background-color: #FFF9D0;
         }
 
-        /* .sidebar {
-        background-color: #A0DEFF;
-
-        /*background: linear-gradient(to , #ee7724, aliceblue, #ee7724, #d8363a, #dd3675, #b44593); */
-        /* } */
-
-        .header {
-            background-color: #CAF4FF;
-            /* background: linear-gradient(to right, #000000, #d5b6b7); */
+        #main {
+            margin-left: 250px;
         }
 
         .sidebar {
@@ -190,6 +182,87 @@
                 font-size: 12px;
             }
         }
+
+        .card {
+            overflow: auto;
+            /* Add scrollbar if content overflows */
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        table.datatable {
+            width: 100%;
+            /* Take full width of parent */
+            border-collapse: collapse;
+            /* Collapse borders */
+        }
+
+        table.datatable th,
+        table.datatable td {
+            border: 1px solid #ddd;
+            /* Add borders */
+            padding: 10px;
+            /* Add padding */
+            text-align: left;
+            /* Align text left */
+        }
+
+        /* Responsive design for smaller screens */
+
+        @media (max-width: 768px) {
+            table.datatable {
+                font-size: 14px;
+                /* Reduce font size */
+            }
+
+            table.datatable th,
+            table.datatable td {
+                padding: 5px;
+                /* Reduce padding */
+            }
+        }
+
+        @media (max-width: 480px) {
+            table.datatable {
+                font-size: 12px;
+                /* Reduce font size further */
+            }
+
+            table.datatable th,
+            table.datatable td {
+                padding: 2px;
+                /* Reduce padding further */
+            }
+        }
+
+        /* Adjust image size */
+
+        .card-body img {
+            max-width: 50px;
+            /* Set maximum image width */
+            max-height: 50px;
+            /* Set maximum image height */
+            object-fit: cover;
+            /* Maintain aspect ratio */
+        }
+
+        /* Adjust table header style */
+
+        table.datatable thead th {
+            background-color: #f0f0f0;
+            /* Light gray background */
+            font-weight: bold;
+            /* Bold font */
+        }
+
+        /* Adjust table row hover style */
+
+        table.datatable tbody tr:hover {
+            background-color: #f9f9f9;
+            /* Light hover background */
+        }
     </style>
 </head>
 
@@ -289,6 +362,8 @@
 
         <ul class="sidebar-nav" id="sidebar-nav">
 
+            <li class="nav-item text-dark-emphasis">Main Navigation</li>
+
             <li class="nav-item">
                 <a class="nav-link " href="/dashboard">
                     <i class="bi bi-grid"></i>
@@ -309,7 +384,23 @@
                     <span>Books</span>
                 </a>
             </li><!-- End Books Table Nav -->
+
+            <li class="nav-item text-dark-emphasis">Settings</li>
+            <li class="nav-item">
+                <a class="nav-link " href="#">
+                    <i class="bi bi-key-fill"></i>
+                    <span>Change Password</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/login">
+                    <i class="bi bi-box-arrow-left"></i>
+                    <span>Sign out</span>
+                </a>
+            </li>
         </ul>
+
     </aside><!-- End Sidebar-->
 
 
@@ -337,7 +428,7 @@
                                 <thead>
                                     <tr>
                                         <th>
-                                            <b>Book</b>Image
+                                            <b>Book</b> Image
                                         </th>
                                         <th>
                                             <b>Book</b> Name
@@ -376,7 +467,10 @@
                                         <tr>
                                             <td>
                                                 <!-- <%= book.bookImage %> -->
-                                                <img src="<%= book.bookImage %>" text-center width="30px" height="30px">
+                                                <!-- <img src="<%= book.bookImage %>" text-center width="30px" height="30px"> -->
+                                                <img src="<%= book.bookImage %>" class="mx-auto d-block" width="50px"
+                                                    height="50px">
+
                                             </td>
                                             <td>
                                                 <%= book.bookTitle %>
@@ -405,7 +499,7 @@
                                             <td>
                                                 <%= book.pricePerUnit %>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <!-- <a href="/edit/book/<%= book._id %>" class="btn btn-primary">Edit</a> -->
                                                 <a href="/edit/book/<%= book._id %>">
                                                     <i class="bi bi-pencil-square"></i>
